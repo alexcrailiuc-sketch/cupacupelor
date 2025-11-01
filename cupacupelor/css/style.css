@@ -1,0 +1,72 @@
+body{
+  font-family: Arial, sans-serif;
+  background: url('images/stadium-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  margin:0;
+  padding:0;
+  color:#333;
+}
+header{
+  background: rgba(0,0,0,0.6);
+  padding:10px;
+  text-align:center;
+  color:white;
+}
+header .logo{
+  width:80px;
+  height:auto;
+}
+nav a{
+  margin:0 10px;
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+}
+nav a.active{
+  text-decoration:underline;
+}
+main{
+  padding:20px;
+  background: rgba(255,255,255,0.9);
+  margin:10px auto;
+  max-width:1000px;
+  border-radius:10px;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-bottom:20px;
+}
+table, th, td{
+  border:1px solid #ccc;
+}
+th, td{
+  padding:8px;
+  text-align:center;
+}
+form{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+form input, form button{
+  padding:5px;
+  font-size:1rem;
+}
+button{
+  cursor:pointer;
+  background: #4CAF50;
+  color:white;
+  border:none;
+  border-radius:5px;
+}
+button:hover{
+  background: #45a049;
+}
+footer{
+  text-align:center;
+  padding:10px;
+  background: rgba(0,0,0,0.6);
+  color:white;
+  margin-top:20px;
+}

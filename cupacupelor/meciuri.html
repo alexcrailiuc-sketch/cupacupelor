@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meciuri Cupa Cupelor 2025</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<img src="images/logo.png" alt="Logo Cupa Cupelor" class="logo">
+<h1>Meciuri Cupa Cupelor 2025</h1>
+<nav>
+<a href="index.html">Clasament</a>
+<a href="cupa.html">Cupa</a>
+<a href="meciuri.html" class="active">Meciuri</a>
+<a href="echipe.html">Echipe</a>
+</nav>
+</header>
+
+<main>
+<input type="text" id="filterTeam" placeholder="Caută echipa..." onkeyup="filterMatches()">
+
+<table id="matchesTable">
+<thead>
+<tr><th>Data</th><th>Echipa Gazdă</th><th>Echipa Oaspete</th><th>Scor</th></tr>
+</thead>
+<tbody>
+<tr data-id="1"><td>01/11/2025</td><td>Steaua</td><td>Dinamo</td><td>2-1</td></tr>
+<tr data-id="2"><td>02/11/2025</td><td>Rapid</td><td>CFR Cluj</td><td>1-0</td></tr>
+<tr data-id="3"><td>03/11/2025</td><td>Farul</td><td>U Cluj</td><td>0-3</td></tr>
+</tbody>
+</table>
+
+<h2>Introdu scor meci</h2>
+<form id="scorForm">
+  <label for="idMeci">ID meci:</label>
+  <input type="number" id="idMeci" required placeholder="Ex: 1">
+  <label for="scorGazde">Scor gazde:</label>
+  <input type="number" id="scorGazde" required>
+  <label for="scorOaspeti">Scor oaspeți:</label>
+  <input type="number" id="scorOaspeti" required>
+  <button type="submit">Salvează scor</button>
+</form>
+
+</main>
+
+<footer>© 2025 Cupa Cupelor | Toate drepturile rezervate.</footer>
+
+<script>
+function filterMatches() {
+  const input = document.getElementById('filterTeam').value.toLowerCase();
+  const rows = document.getElementById('matchesTable').getElementsByTagName('tr');
+  for(let i=1;i<rows.length;i++){
+    const cells = rows[i].getElementsByTagName('td');
+    let match=false;
+    for(let j=1;j<=2;j++){
+      if(cells[j].textContent.toLowerCase().includes(input)) match=true;
+    }
+    rows[i].style.display = match ? "" : "none";
+  }
+}
+
+document.getElementById("scorForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  const idMeci=parseInt(document.getElementById("idMeci").value);
+  const scorGazde=parseInt(document.getElementById("scorGazde").value);
+  const scorOaspeti=parseInt(document.getElementById("scorOaspeti").value);
+
+  const row=document.querySelector('tr[data-id="'+idMeci+'"]');
+  if(row){
+    row.cells[3].textContent = scorGazde + "-" + scorOaspeti;
+    alert("Scorul a fost actualizat!");
+    this.reset();
+    // update clasament și cupă
+    actualizeazaClasamentDupaMeci(row.cells[1].textContent,row.cells[2].textContent,scorGazde,scorOaspeti);
+    actualizeazaCupaDupaMeci(row.cells[1].textContent,row.cells[2].textContent,scorGazde,scorOaspeti);
+  }else alert("ID meci invalid!");
+});
+</script>
+
+<script src="js/liveScores.js"></script>
+</body>
+</html>
